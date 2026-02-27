@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, Mamá!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff7eb3;
+            --secondary-color: #ff758c;
+            --bg-gradient: linear-gradient(135deg, #2c003e 0%, #1a0024 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            position: relative;
+            padding: 20px; /* Espacio de seguridad para móviles */
+        }
+
+        #particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
+            /* Ajuste para que la tarjeta no sea más alta que la pantalla en móviles pequeños */
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem); /* Tamaño fluido */
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 126, 179, 0.5);
+        }
+
+        p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .signature {
+            margin-top: 1.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+            width: fit-content;
+            align-self: center;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 126, 179, 0.6);
+        }
+
+        .hidden { display: none !important; }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            animation: floatUp linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Ajustes específicos para móviles muy pequeños */
+        @media (max-width: 380px) {
+            .card {
+                padding: 1.5rem;
+            }
+            p {
+                line-height: 1.3;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+
+    <div class="card" id="card">
+        <div id="intro">
+            <h1>Para la mujer más especial...</h1>
+            <p>He preparado algo para ti usando lo que mejor sé hacer.</p>
+            <button id="openBtn">Toca aquí ❤️</button>
+        </div>
+
+        <div id="message" class="hidden">
+            <h2>¡Feliz Cumpleaños, Mamá! 🎉</h2>
+            <p>Hoy no quise darte un regalo convencional, sino entregarte un pedazo de mi mundo. He transformado el <u>código</u> en estas líneas, escritas con el mismo amor con el que tú has guiado mi vida.</p>
+            <p>Gracias por ser mi norte y mi refugio. Todo mi esfuerzo es también gracias a ti.</p>
+            <p>¡Te amo profundamente!</p>
+            <p class="signature">Te amo infinito,<br>Matty</p>
+        </div>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openBtn');
+        const introSection = document.getElementById('intro');
+        const messageSection = document.getElementById('message');
+        const particlesContainer = document.getElementById('particles-container');
+        const emojis = ['❤️', '✨', '🌸', '💖', '🎉', '🌟'];
+
+        openBtn.addEventListener('click', () => {
+            introSection.classList.add('hidden');
+            messageSection.classList.remove('hidden');
+            messageSection.classList.add('fade-in');
+            startParticles();
+        });
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = Math.random() * 95 + 'vw';
+            
+            const duration = Math.random() * 3 + 4; 
+            particle.style.animationDuration = duration + 's';
+            particle.style.fontSize = (Math.random() * 0.5 + 1) + 'rem'; 
+            
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        function startParticles() {
+            setInterval(createParticle, 400);
+            for(let i=0; i < 10; i++){
+                setTimeout(createParticle, Math.random() * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
